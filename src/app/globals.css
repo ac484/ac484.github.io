@@ -3,24 +3,53 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #2563eb; /* 藍色作為主色 */
+  --primary-hover: #1d4ed8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* 擴展 Tailwind 顏色 */
+  --color-gray-50: #f9fafb;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #3b82f6; /* 亮一點的藍色在暗模式下 */
+    --primary-hover: #60a5fa;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 自定義組件樣式 */
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-hover text-white px-6 py-3 rounded-lg font-medium transition-colors;
+  }
+  
+  .section-padding {
+    @apply py-20;
+  }
+  
+  .container {
+    @apply mx-auto px-6 max-w-7xl;
+  }
+  
+  .card {
+    @apply bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow;
+  }
 }
