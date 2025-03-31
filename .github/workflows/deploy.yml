@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write  # 给予工作流写入权限
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20  # 推荐使用 Node.js 20 或 18 LTS
 
       - name: Install dependencies
         run: npm install
@@ -26,12 +26,15 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Verify out directory exists
-        run: ls -la out/  # 用于调试，确认out目录存在
+      - name: Verify output directory
+        run: |
+          ls -la ./.next/out  # 检查新的输出目录
+          cp -r ./.next/out ./out  # 创建兼容旧路径的目录
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          keep_files: false  # 清除gh-pages分支上的旧文件
+          publish_dir: ./.next/out  # 使用新的标准输出路径
+          keep_files: false
+          force_orphan: true  # 确保完全清理旧文件
