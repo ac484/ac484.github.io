@@ -1,5 +1,4 @@
-import { Section } from "../../layout/Section";
-import { Container } from "../../layout/Container";
+import { Section, Container } from "../../layout/Layout";
 import type { ReactNode } from "react";
 import { COMPANY_INFO } from "../../../data"; // 更新為從data引用
 

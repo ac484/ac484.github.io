@@ -1,13 +1,9 @@
 import { Navigation } from "../components/client/Navigation";
 import { BackToTop } from "../components/client/BackToTop";
 import { ContactForm } from "../components/client/ContactForm";
-import { Hero } from "../components/server/sections/Hero";
-import { Services } from "../components/server/sections/Services";
-import { Projects } from "../components/server/sections/Projects";
-import { About } from "../components/server/sections/About";
-import { Contact } from "../components/server/sections/Contact";
-import { Careers } from "../components/server/sections/Careers";
-import { Footer } from "../components/server/sections/Footer";
+import { Hero, Footer } from "../components/server/sections/FrameSections";
+import { Services, Projects, Contact } from "../components/server/sections/ContentSections";
+import { About, Careers } from "../components/server/sections/InfoSections";
 
 export default function Home() {
   return (

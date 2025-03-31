@@ -1,5 +1,18 @@
 import { clsx } from 'clsx';
 
+interface ContainerProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Container({ children, className = "" }: ContainerProps) {
+  return (
+    <div className={`container mx-auto px-6 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 const SECTION_STYLES = {
   default: 'py-20',
   compact: 'py-12',

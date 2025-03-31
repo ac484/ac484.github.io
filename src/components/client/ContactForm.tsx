@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { sendContactForm } from '../../actions/actions'; // 更新引用路徑
+import { sendContactForm } from '../../actions/actions';
 import type { ContactFormData } from '../../types';
+import { validateContactForm } from '../../utils'; // 更新引用路徑
 
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -21,6 +22,15 @@ export function ContactForm() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    
+    // 使用新的驗證函數
+    const validation = validateContactForm(formData);
+    if (!validation.isValid) {
+      setFormStatus('error');
+      setErrorMessage(Object.values(validation.errors)[0] || '表單填寫有誤');
+      return;
+    }
+    
     setFormStatus('loading');
     
     try {
