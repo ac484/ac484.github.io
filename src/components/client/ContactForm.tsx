@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { sendContactForm } from '../../@actions/actions';
+import { sendContactForm } from '../../actions/actions'; // 更新引用路徑
+import type { ContactFormData } from '../../types';
 
 export function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     phone: '',
     message: ''
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,6 +29,7 @@ export function ContactForm() {
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       setFormStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : '提交失敗');
     }
   };
 
@@ -39,7 +42,7 @@ export function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           placeholder="您的姓名"
-          className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="form-input"
           required
         />
       </div>
@@ -50,7 +53,7 @@ export function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           placeholder="電子郵件"
-          className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="form-input"
           required
         />
       </div>
@@ -61,7 +64,7 @@ export function ContactForm() {
           value={formData.phone}
           onChange={handleChange}
           placeholder="電話號碼"
-          className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="form-input"
         />
       </div>
       <div>
@@ -71,14 +74,14 @@ export function ContactForm() {
           onChange={handleChange}
           placeholder="您的需求"
           rows={4}
-          className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="form-input"
           required
         ></textarea>
       </div>
       <button
         type="submit"
         disabled={formStatus === 'loading'}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium w-full disabled:bg-blue-400"
+        className="btn-primary w-full disabled:bg-blue-400"
       >
         {formStatus === 'loading' ? '處理中...' : '送出詢價'}
       </button>
@@ -91,7 +94,7 @@ export function ContactForm() {
       
       {formStatus === 'error' && (
         <div className="p-3 bg-red-800 text-white rounded">
-          提交失敗，請稍後再試或直接聯絡我們。
+          {errorMessage || '提交失敗，請稍後再試或直接聯絡我們。'}
         </div>
       )}
     </form>

@@ -10,4 +10,41 @@
   --primary-hover: #1d4ed8;
 }
 
-/* ... 其餘部分保留 ... */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium inline-block transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium inline-block transition-colors;
+  }
+  
+  .heading-1 {
+    @apply text-4xl md:text-6xl font-bold;
+  }
+  
+  .heading-2 {
+    @apply text-3xl font-bold;
+  }
+  
+  .heading-3 {
+    @apply text-xl font-semibold;
+  }
+  
+  .section-container {
+    @apply container mx-auto px-6;
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
