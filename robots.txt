@@ -1,0 +1,5 @@
+// filepath: d:\GitHub\ac484.github.io\public\robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://ac484.github.io/sitemap.xml
