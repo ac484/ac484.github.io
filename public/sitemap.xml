@@ -1,0 +1,11 @@
+// filepath: d:\GitHub\ac484.github.io\public\sitemap.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ac484.github.io/</loc>
+    <lastmod>2024-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- 可以加入其他頁面 -->
+</urlset>
